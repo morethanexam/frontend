@@ -85,6 +85,10 @@ export default function HomePage() {
       <Link href="/articles" style={{ marginTop: '12px' }}>
         文章管理
       </Link>
+
+      <Link href="/words" style={{ marginTop: '12px' }}>
+        单词管理
+      </Link>
     </main>
   );
 }
