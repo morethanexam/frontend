@@ -11,6 +11,10 @@ export default function UserPage() {
     <main style={{ padding: '1rem' }}>
       <h2>欢迎 {username}</h2>
       <p>手机号：{phone}</p>
+
+      <a href="/articles/list" style={{ display: 'inline-block', marginTop: '1rem' }}>
+        查看所有文章
+      </a>
     </main>
   );
 } 

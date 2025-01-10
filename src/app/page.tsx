@@ -81,6 +81,10 @@ export default function HomePage() {
       <Link href="/admin" style={{ marginTop: '12px' }}>
         管理页面
       </Link>
+
+      <Link href="/articles" style={{ marginTop: '12px' }}>
+        文章管理
+      </Link>
     </main>
   );
 }
