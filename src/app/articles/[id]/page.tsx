@@ -7,23 +7,27 @@ export default function ArticleDetailPage() {
   const params = useParams();
   const articleId = params.id;
 
-  const [article, setArticle] = useState<any>(null);
+  const [articleDetail, setArticleDetail] = useState({
+    originalTitle: '',
+    originalType: '',
+    rewrittenContent: '',
+  });
   const [error, setError] = useState('');
 
   useEffect(() => {
     if (articleId) {
-      fetchArticle();
+      fetchRewrittenArticle();
     }
   }, [articleId]);
 
-  async function fetchArticle() {
+  async function fetchRewrittenArticle() {
     try {
-      const res = await fetch(`http://localhost:3001/articles/${articleId}`);
+      const res = await fetch(`http://localhost:3001/articles/${articleId}/rewrite`);
       if (!res.ok) {
-        throw new Error('获取文章内容失败');
+        throw new Error('获取改写后的文章内容失败');
       }
       const data = await res.json();
-      setArticle(data);
+      setArticleDetail(data);
     } catch (err: any) {
       console.error(err);
       setError(err.message);
@@ -38,20 +42,15 @@ export default function ArticleDetailPage() {
     );
   }
 
-  if (!article) {
-    return (
-      <main style={{ padding: '1rem' }}>
-        <p>加载中...</p>
-      </main>
-    );
-  }
-
   return (
     <main style={{ padding: '1rem' }}>
-      <h2>标题：{article.title}</h2>
-      <p>分类：{article.type}</p>
+      <h2>标题：{articleDetail.originalTitle}</h2>
+      <p>分类：{articleDetail.originalType}</p>
       <hr style={{ margin: '1rem 0' }} />
-      <p>{article.content}</p>
+      <div
+        dangerouslySetInnerHTML={{ __html: articleDetail.rewrittenContent }}
+        style={{ color: 'black' }} // 默认文本颜色
+      />
     </main>
   );
 } 
